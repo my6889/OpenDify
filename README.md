@@ -34,21 +34,24 @@ pip install -r requirements.txt
 ### 配置
 
 1. 复制 `.env.example` 文件并重命名为 `.env`：
-```bash
-cp .env.example .env
-```
+   
+   ```bash
+   cp .env.example .env
+   ```
 
 2. 在 Dify 平台配置应用：
+   
    - 登录 Dify 平台，进入工作室
    - 点击"创建应用"，配置好需要的模型（如 Claude、Gemini 等）
    - 配置应用的提示语和其他参数
    - 发布应用
    - 进入"访问 API"页面，生成 API 密钥
-
+   
    > **重要说明**：Dify 不支持在请求时动态传入提示词、切换模型及其他参数。所有这些配置都需要在创建应用时设置好。Dify 会根据 API 密钥来确定使用哪个应用及其对应的配置。系统会自动从 Dify API 获取应用的名称和描述信息。
 
 3. 在 `.env` 文件中配置你的 Dify API Keys：
-```env
+   
+```
 # Dify API Keys Configuration
 # Format: Comma-separated list of API keys
 DIFY_API_KEYS=app-xxxxxxxx,app-yyyyyyyy,app-zzzzzzzz
@@ -57,22 +60,26 @@ DIFY_API_KEYS=app-xxxxxxxx,app-yyyyyyyy,app-zzzzzzzz
 DIFY_API_BASE="https://your-dify-api-base-url/v1"
 
 # Server Configuration
-SERVER_HOST="127.0.0.1"
+SERVER_HOST="0.0.0.0"
 SERVER_PORT=5000
 ```
-
 配置说明：
 - `DIFY_API_KEYS`：以逗号分隔的 API Keys 列表，每个 Key 对应一个 Dify 应用
 - 系统会自动从 Dify API 获取每个应用的名称和信息
 - 无需手动配置模型名称和映射关系
 
 ### 运行服务
+Bash
 
-```bash
+```
 python openai_to_dify.py
 ```
+Docker
+```
+docker compose up -d 
+```
 
-服务将在 `http://127.0.0.1:5000` 启动
+服务将在 `http://0.0.0.0:5000` 启动
 
 ## API 使用
 
